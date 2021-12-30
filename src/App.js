@@ -1,17 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ProductList from "./component/ProductList"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import About from "./component/About";
+import Contact from "./component/Contact";
+
 
 function App() {
-
-  //const [title, setTitle] = useState('Hello World');
-
-  // const clickMe = (name) => {
-  //   console.log('Halo : ' + name);
-  // }
-
-  // const changeTitle = () => {
-  //   setTitle("Title changed");
-  // }
 
   const [products, setProducts] = useState([
     { id: 1, title: "Products 1", price: 899 },
@@ -21,38 +15,29 @@ function App() {
     { id: 5, title: "Products 5", price: 799 },
   ]);
 
-  const [name, setName] = useState('Bayu');
-
-  // return (
-  //   <div>
-  //     <Header/>
-  //     <button onClick = { () => clickMe('Bayu') } >Click Me</button>
-  //   </div>
-  // );
-
-  // return (
-  //   <div>
-  //    <h1>{ title }</h1>
-  //    <button onClick={ changeTitle }>Change Title</button>
-  //   </div>
-  // )
 
   const deleteProduct = (productId) => {
     const newProducts = products.filter(product => product.id !== productId);
     setProducts(newProducts);
   }
 
-  useEffect(() => {
-    console.log('Use Effect Running');    
-  }, [name]);
-
-  return  (
+  return (
     <div>
-     <ProductList products={ products } deleteProduct={ deleteProduct }/>
-     <button onClick={ () => setName('Jhon') }>Change Name</button>
-     <p>Name: { name } </p>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <ProductList products={products} deleteProduct={deleteProduct} />
+          </Route>
+          <Route exact path="/about">
+            <About />
+          </Route>
+          <Route exact path="/contact">
+            <Contact />
+          </Route>
+        </Switch>
+      </Router>
     </div>
-  )
+  );
 }
 
 export default App;
