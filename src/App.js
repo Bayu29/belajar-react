@@ -1,8 +1,8 @@
 import { useState } from "react";
 import ProductList from "./component/ProductList"
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import About from "./component/About";
-import Contact from "./component/Contact";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import AddProduct from "./component/AddProduct";
+import EditProduct from "./component/EditProduct";
 
 
 function App() {
@@ -24,17 +24,17 @@ function App() {
   return (
     <div>
       <Router>
-        <Switch>
+        <Routes>
           <Route exact path="/">
             <ProductList products={products} deleteProduct={deleteProduct} />
           </Route>
-          <Route exact path="/about">
-            <About />
+          <Route exact path="/add">
+            <AddProduct />
           </Route>
-          <Route exact path="/contact">
-            <Contact />
+          <Route exact path="/edit/:id">
+            <EditProduct />
           </Route>
-        </Switch>
+        </Routes>
       </Router>
     </div>
   );
